@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-16"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>RavenDB.Client.Spatial.Geo</id>
+        <version>0.1.0</version>
+        <title>RavenDB JsonConverters for Geo</title>
+        <authors>Simon Bartlett</authors>
+        <owners>Simon Bartlett</owners>
+        <projectUrl>https://github.com/sibartlett/RavenDB.Client.Spatial</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>GeoJSON and WKT JsonConverters for RavenDB and Geo.</description>
+        <dependencies>
+            <group>
+                <dependency id="Geo" version="0.10.0" />
+                <dependency id="RavenDB.Client" version="2.0.2261" />
+            </group>
+        </dependencies>
+        <tags>ravendb raven ravendbspatial spatial gps coordinates wgs84 geography geo</tags>
+        <iconUrl>http://static.ravendb.net/logo-for-nuget.png</iconUrl>
+    </metadata>
+    <files>
+        <file src="Geo\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\net40\Raven.Client.Spatial.Geo.dll" />
+        <file src="Geo\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\net40\Raven.Client.Spatial.Geo.pdb" />
+        <file src="Geo.Silverlight4\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\sl40\Raven.Client.Spatial.Geo.dll" />
+        <file src="Geo.Silverlight4\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\sl40\Raven.Client.Spatial.Geo.pdb" />
+        <file src="Geo.Silverlight5\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\sl50\Raven.Client.Spatial.Geo.dll" />
+        <file src="Geo.Silverlight5\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\sl50\Raven.Client.Spatial.Geo.pdb" />
+    </files>
+</package>

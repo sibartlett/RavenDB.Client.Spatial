@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-16"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>RavenDB.Client.Spatial.DotSpatial</id>
+        <version>0.1.0</version>
+        <title>RavenDB JsonConverters for DotSpatial</title>
+        <authors>Simon Bartlett</authors>
+        <owners>Simon Bartlett</owners>
+        <projectUrl>https://github.com/sibartlett/RavenDB.Client.Spatial</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>GeoJSON and WKT JsonConverters for RavenDB and DotSpatial.</description>
+        <dependencies>
+            <group>
+                <dependency id="DotSpatial.Topology" version="1.4.23" />
+                <dependency id="RavenDB.Client" version="2.0.2261" />
+            </group>
+        </dependencies>
+		<tags>ravendb raven ravendbspatial spatial gps coordinates wgs84 geography geo dotspatial</tags>
+        <iconUrl>http://static.ravendb.net/logo-for-nuget.png</iconUrl>
+    </metadata>
+    <files>
+        <file src="DotSpatial\bin\Release\Raven.Client.Spatial.DotSpatial.dll" target="lib\net40\Raven.Client.Spatial.DotSpatial.dll" />
+        <file src="DotSpatial\bin\Release\Raven.Client.Spatial.DotSpatial.pdb" target="lib\net40\Raven.Client.Spatial.DotSpatial.pdb" />
+    </files>
+</package>
