@@ -65,56 +65,11 @@
     <Reference Include="System.Windows" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\Raven.Client.Spatial\CoordinateInfo.cs">
-      <Link>CoordinateInfo.cs</Link>
+    <Compile Include="..\..\Raven.Client.Spatial\*.cs">
+      <Link>%(FileName)</Link>
     </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\Dimensions.cs">
-      <Link>Dimensions.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\GeoJsonObjectType.cs">
-      <Link>GeoJsonObjectType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\GeoJsonReader.cs">
-      <Link>GeoJsonReader.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\GeoJsonWriter.cs">
-      <Link>GeoJsonWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\Geo\GeoJsonConverter.cs">
-      <Link>GeoJsonConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\Geo\ShapeConverter.cs">
-      <Link>ShapeConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\Geo\WktConverter.cs">
-      <Link>WktConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\IShapeConverter.cs">
-      <Link>IShapeConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktObjectType.cs">
-      <Link>WktObjectType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktReader.cs">
-      <Link>WktReader.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktToken.cs">
-      <Link>WktToken.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktTokenizer.cs">
-      <Link>WktTokenizer.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktTokenQueue.cs">
-      <Link>WktTokenQueue.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktTokenType.cs">
-      <Link>WktTokenType.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktWriter.cs">
-      <Link>WktWriter.cs</Link>
-    </Compile>
-    <Compile Include="..\..\Raven.Client.Spatial\WktWriterSettings.cs">
-      <Link>WktWriterSettings.cs</Link>
+    <Compile Include="..\..\Raven.Client.Spatial\Geo\*.cs">
+      <Link>%(FileName)</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
