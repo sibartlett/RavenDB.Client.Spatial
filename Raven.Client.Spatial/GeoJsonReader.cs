@@ -27,7 +27,7 @@ namespace Raven.Client.Spatial
 			return result;
 		}
 
-		private bool TryRead(RavenJObject json, out object result)
+		protected virtual bool TryRead(RavenJObject json, out object result)
 		{
 			if (TryParseGeometry(json, out result))
 				return true;
@@ -158,7 +158,7 @@ namespace Raven.Client.Spatial
 				if (coordinates == null || coordinates.Length < 2)
 					return false;
 
-                CoordinateInfo coordinate;
+				CoordinateInfo coordinate;
 				if (TryParseCoordinate(coordinates, out coordinate))
 				{
 					result = _shapeConverter.ToPoint(coordinate);
@@ -175,7 +175,7 @@ namespace Raven.Client.Spatial
 			if (obj.TryGetValue("coordinates", out coord))
 			{
 				var coordinates = coord as RavenJArray;
-                CoordinateInfo[] co;
+				CoordinateInfo[] co;
 				if (coordinates != null && TryParseCoordinateArray(coordinates, out co))
 				{
 					result = _shapeConverter.ToLineString(co);
@@ -193,7 +193,7 @@ namespace Raven.Client.Spatial
 			{
 				var coordinates = coord as RavenJArray;
 
-                CoordinateInfo[][] temp;
+				CoordinateInfo[][] temp;
 				if (coordinates != null && coordinates.Length > 0 && TryParseCoordinateArrayArray(coordinates, out temp))
 				{
 					result = _shapeConverter.ToPolygon(temp);
@@ -210,7 +210,7 @@ namespace Raven.Client.Spatial
 			if (obj.TryGetValue("coordinates", out coord))
 			{
 				var coordinates = coord as RavenJArray;
-                CoordinateInfo[] co;
+				CoordinateInfo[] co;
 				if (coordinates != null && TryParseCoordinateArray(coordinates, out co))
 				{
 					result = _shapeConverter.ToMultiPoint(co);
@@ -227,7 +227,7 @@ namespace Raven.Client.Spatial
 			if (obj.TryGetValue("coordinates", out coord))
 			{
 				var coordinates = coord as RavenJArray;
-                CoordinateInfo[][] co;
+				CoordinateInfo[][] co;
 				if (coordinates != null && TryParseCoordinateArrayArray(coordinates, out co))
 				{
 					result = _shapeConverter.ToMultiLineString(co);
@@ -244,7 +244,7 @@ namespace Raven.Client.Spatial
 			if (obj.TryGetValue("coordinates", out coord))
 			{
 				var coordinates = coord as RavenJArray;
-                CoordinateInfo[][][] co;
+				CoordinateInfo[][][] co;
 				if (coordinates != null && TryParseCoordinateArrayArrayArray(coordinates, out co))
 				{
 					result = _shapeConverter.ToMultiPolygon(co);
@@ -279,20 +279,20 @@ namespace Raven.Client.Spatial
 			return false;
 		}
 
-        private bool TryParseCoordinate(RavenJArray coordinates, out CoordinateInfo result)
+		private bool TryParseCoordinate(RavenJArray coordinates, out CoordinateInfo result)
 		{
 			if (coordinates != null && coordinates.Length > 1 && coordinates.All(x => x is RavenJValue))
 			{
 				var vals = coordinates.Cast<RavenJValue>().ToList();
 				if (vals.All(x => x.Type == JTokenType.Float || x.Type == JTokenType.Integer))
 				{
-				    result = new CoordinateInfo
-				        {
-                            X = Convert.ToDouble(vals[0].Value),
-                            Y = Convert.ToDouble(vals[1].Value),
-                            Z = vals.Count > 2 ? Convert.ToDouble(vals[2].Value) : (double?) null,
-                            M = vals.Count > 3 ? Convert.ToDouble(vals[3].Value) : (double?) null
-				        };
+					result = new CoordinateInfo
+						{
+							X = Convert.ToDouble(vals[0].Value),
+							Y = Convert.ToDouble(vals[1].Value),
+							Z = vals.Count > 2 ? Convert.ToDouble(vals[2].Value) : (double?) null,
+							M = vals.Count > 3 ? Convert.ToDouble(vals[3].Value) : (double?) null
+						};
 					return true;
 				}
 			}
@@ -300,7 +300,7 @@ namespace Raven.Client.Spatial
 			return false;
 		}
 
-        private bool TryParseCoordinateArray(RavenJArray coordinates, out CoordinateInfo[] result)
+		private bool TryParseCoordinateArray(RavenJArray coordinates, out CoordinateInfo[] result)
 		{
 			result = null;
 			if (coordinates == null)
@@ -310,7 +310,7 @@ namespace Raven.Client.Spatial
 			if (!valid)
 				return false;
 
-            var tempResult = new CoordinateInfo[coordinates.Length];
+			var tempResult = new CoordinateInfo[coordinates.Length];
 			for (var index = 0; index < coordinates.Length; index++)
 			{
 				if (!TryParseCoordinate((RavenJArray)coordinates[index], out tempResult[index]))
@@ -320,7 +320,7 @@ namespace Raven.Client.Spatial
 			return true;
 		}
 
-        private bool TryParseCoordinateArrayArray(RavenJArray coordinates, out CoordinateInfo[][] result)
+		private bool TryParseCoordinateArrayArray(RavenJArray coordinates, out CoordinateInfo[][] result)
 		{
 			result = null;
 			if (coordinates == null)
@@ -330,7 +330,7 @@ namespace Raven.Client.Spatial
 			if (!valid)
 				return false;
 
-            var tempResult = new CoordinateInfo[coordinates.Length][];
+			var tempResult = new CoordinateInfo[coordinates.Length][];
 			for (var index = 0; index < coordinates.Length; index++)
 			{
 				if (!TryParseCoordinateArray((RavenJArray)coordinates[index], out tempResult[index]))
@@ -340,7 +340,7 @@ namespace Raven.Client.Spatial
 			return true;
 		}
 
-        private bool TryParseCoordinateArrayArrayArray(RavenJArray coordinates, out CoordinateInfo[][][] result)
+		private bool TryParseCoordinateArrayArrayArray(RavenJArray coordinates, out CoordinateInfo[][][] result)
 		{
 			result = null;
 			if (coordinates == null)
@@ -350,7 +350,7 @@ namespace Raven.Client.Spatial
 			if (!valid)
 				return false;
 
-            var tempResult = new CoordinateInfo[coordinates.Length][][];
+			var tempResult = new CoordinateInfo[coordinates.Length][][];
 			for (var index = 0; index < coordinates.Length; index++)
 			{
 				if (!TryParseCoordinateArrayArray((RavenJArray)coordinates[index], out tempResult[index]))
@@ -368,7 +368,7 @@ namespace Raven.Client.Spatial
 
 			var ravenJObject = obj as RavenJObject;
 			if (ravenJObject != null)
-                return Enumerable.ToDictionary(ravenJObject, x => x.Key, x => SantizeRavenJObjects(x));
+				return Enumerable.ToDictionary(ravenJObject, x => x.Key, x => SantizeRavenJObjects(x));
 
 			return obj;
 		}

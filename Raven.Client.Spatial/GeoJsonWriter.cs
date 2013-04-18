@@ -12,7 +12,7 @@ namespace Raven.Client.Spatial
 			_shapeConverter = shapeConverter;
 		}
 
-		public void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+		public virtual void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
 		{
 			if (value == null)
 			{
@@ -118,13 +118,13 @@ namespace Raven.Client.Spatial
 			if (coordinate.Z.HasValue)
 				writer.WriteValue(coordinate.Z.Value);
 
-            if (coordinate.Z.HasValue && coordinate.M.HasValue)
+			if (coordinate.Z.HasValue && coordinate.M.HasValue)
 				writer.WriteValue(coordinate.M.Value);
 
 			writer.WriteEndArray();
 		}
 
-        private static void WriteJsonCoordinates(JsonWriter writer, CoordinateInfo[] coordinates)
+		protected static void WriteJsonCoordinates(JsonWriter writer, CoordinateInfo[] coordinates)
 		{
 			writer.WriteStartArray();
 			foreach (var coordinate in coordinates)
@@ -132,7 +132,7 @@ namespace Raven.Client.Spatial
 			writer.WriteEndArray();
 		}
 
-        private static void WriteJsonCoordinatesEnumerable(JsonWriter writer, CoordinateInfo[][] coordinates)
+		protected static void WriteJsonCoordinatesEnumerable(JsonWriter writer, CoordinateInfo[][] coordinates)
 		{
 			writer.WriteStartArray();
 			foreach (var coordinate in coordinates)
@@ -140,7 +140,7 @@ namespace Raven.Client.Spatial
 			writer.WriteEndArray();
 		}
 
-        private static void WriteJsonCoordinatesEnumerable2(JsonWriter writer, CoordinateInfo[][][] coordinates)
+		protected static void WriteJsonCoordinatesEnumerable2(JsonWriter writer, CoordinateInfo[][][] coordinates)
 		{
 			writer.WriteStartArray();
 			foreach (var coordinate in coordinates)

@@ -1,5 +1,6 @@
 using System;
 using Geo.Abstractions.Interfaces;
+using Geo.Gps;
 using Raven.Imports.Newtonsoft.Json;
 
 namespace Raven.Client.Spatial.Geo
@@ -18,7 +19,7 @@ namespace Raven.Client.Spatial.Geo
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(IGeometry).IsAssignableFrom(objectType);
+			return typeof(IGeometry).IsAssignableFrom(objectType) || objectType == typeof(Route) || objectType == typeof(Track);
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

@@ -71,6 +71,8 @@
     <Compile Include="GeoJsonReader.cs" />
     <Compile Include="GeoJsonWriter.cs" />
     <Compile Include="Geo\GeoJsonConverter.cs" />
+    <Compile Include="Geo\GeoJsonReader.cs" />
+    <Compile Include="Geo\GeoJsonWriter.cs" />
     <Compile Include="Geo\ShapeConverter.cs" />
     <Compile Include="Geo\WktConverter.cs" />
     <Compile Include="IShapeConverter.cs" />
