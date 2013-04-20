@@ -38,8 +38,9 @@
     <Reference Include="DotSpatial.Topology">
       <HintPath>..\packages\DotSpatial.Topology.1.4.23\lib\net40-Client\DotSpatial.Topology.dll</HintPath>
     </Reference>
-    <Reference Include="Geo">
-      <HintPath>..\packages\Geo.0.10.0\lib\portable-win+net40+sl40+wp\Geo.dll</HintPath>
+    <Reference Include="Geo, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Geo.0.10.1\lib\portable-win+net40+sl40+wp\Geo.dll</HintPath>
     </Reference>
     <Reference Include="GeoAPI, Version=1.7.1.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -53,20 +54,25 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NetTopologySuite.1.13.0\lib\net40-client\PowerCollections.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Abstractions">
-      <HintPath>..\packages\RavenDB.Client.2.0.2261\lib\net40\Raven.Abstractions.dll</HintPath>
+    <Reference Include="Raven.Abstractions, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Embedded">
-      <HintPath>..\packages\RavenDB.Embedded.2.0.2261\lib\net40\Raven.Client.Embedded.dll</HintPath>
+    <Reference Include="Raven.Client.Embedded, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Embedded.2.0.2330\lib\net40\Raven.Client.Embedded.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Lightweight">
-      <HintPath>..\packages\RavenDB.Client.2.0.2261\lib\net40\Raven.Client.Lightweight.dll</HintPath>
+    <Reference Include="Raven.Client.Lightweight, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Client.2.0.2330\lib\net40\Raven.Client.Lightweight.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Database">
-      <HintPath>..\packages\RavenDB.Database.2.0.2261\lib\net40\Raven.Database.dll</HintPath>
+    <Reference Include="Raven.Database, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Database.2.0.2330\lib\net40\Raven.Database.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Tests.Helpers">
-      <HintPath>..\packages\RavenDB.Tests.Helpers.2.0.2261\lib\net40\Raven.Tests.Helpers.dll</HintPath>
+    <Reference Include="Raven.Tests.Helpers, Version=2.0.3.0, Culture=neutral, PublicKeyToken=37f41c7f99471593, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RavenDB.Tests.Helpers.2.0.2330\lib\net40\Raven.Tests.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
