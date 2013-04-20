@@ -59,7 +59,6 @@
     <Compile Include="..\..\Raven.Client.Spatial\NetTopologySuite\*.cs">
       <Link>%(FileName)</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -56,7 +56,6 @@
     <Compile Include="..\..\Raven.Client.Spatial\DotSpatial\*.cs">
       <Link>%(FileName)</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

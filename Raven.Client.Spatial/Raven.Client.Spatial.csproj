@@ -62,6 +62,7 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CommonAssemblyInfo.cs" />
     <Compile Include="CoordinateInfo.cs" />
     <Compile Include="Dimensions.cs" />
     <Compile Include="DotSpatial\GeoJsonConverter.cs" />

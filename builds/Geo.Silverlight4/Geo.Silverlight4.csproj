@@ -71,7 +71,6 @@
     <Compile Include="..\..\Raven.Client.Spatial\Geo\*.cs">
       <Link>%(FileName)</Link>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
