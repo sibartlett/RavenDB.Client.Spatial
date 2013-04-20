@@ -10,6 +10,9 @@
 		MultiPolygon,
 		GeometryCollection,
 		Feature,
-		FeatureCollection
+		FeatureCollection,
+
+		Envelope,
+		Circle
 	}
 }

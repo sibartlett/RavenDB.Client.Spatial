@@ -2,11 +2,13 @@
 
 namespace Raven.Client.Spatial
 {
-    internal interface IShapeConverter
+	internal interface IShapeConverter
 	{
 		bool IsValid(object obj);
 		GeoJsonObjectType GetGeoJsonObjectType(object obj);
 		WktObjectType GetWktObjectType(object obj);
+
+		bool CanConvert(WktObjectType type);
 
 		object ToPoint(CoordinateInfo coordinates);
 		object ToLineString(CoordinateInfo[] coordinates);
@@ -18,6 +20,8 @@ namespace Raven.Client.Spatial
 		object ToGeometryCollection(object[] geometries);
 		object ToFeature(object geometry, object id, Dictionary<string, object> properties);
 		object ToFeatureCollection(object[] features);
+		object ToEnvelope(CoordinateInfo[] coordinates);
+		object ToCircle(double[] circle);
 
 		CoordinateInfo FromPoint(object point);
 		CoordinateInfo[] FromLineString(object lineString);
@@ -29,5 +33,7 @@ namespace Raven.Client.Spatial
 		object[] FromGeometryCollection(object geometryCollection);
 		object FromFeature(object feature, out object id, out Dictionary<string, object> properties);
 		object[] FromFeatureCollection(object featureCollection);
+		CoordinateInfo[] FromEnvelope(object envelope);
+		double[] FromCircle(object circle);
 	}
 }

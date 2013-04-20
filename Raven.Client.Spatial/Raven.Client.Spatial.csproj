@@ -74,7 +74,10 @@
     <Compile Include="Geo\GeoJsonReader.cs" />
     <Compile Include="Geo\GeoJsonWriter.cs" />
     <Compile Include="Geo\ShapeConverter.cs" />
+    <Compile Include="Spatial4nReader.cs" />
+    <Compile Include="Spatial4nWriter.cs" />
     <Compile Include="Geo\WktConverter.cs" />
+    <Compile Include="Helpers.cs" />
     <Compile Include="IShapeConverter.cs" />
     <Compile Include="NetTopologySuite\GeoJsonConverter.cs" />
     <Compile Include="NetTopologySuite\ShapeConverter.cs" />

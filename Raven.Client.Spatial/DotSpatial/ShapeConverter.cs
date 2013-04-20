@@ -14,213 +14,254 @@ namespace Raven.Client.Spatial.DotSpatial
 			_geometryFactory = geometryFactory;
 		}
 
-        public bool IsValid(object obj)
-        {
-            return obj is IPoint
-                || obj is ILineString
-                || obj is IPolygon
-                || obj is IMultiPoint
-                || obj is IMultiLineString
-                || obj is IMultiPolygon
-                || obj is IGeometryCollection;
-        }
+		public bool IsValid(object obj)
+		{
+			return obj is IPoint
+				|| obj is ILineString
+				|| obj is IPolygon
+				|| obj is IMultiPoint
+				|| obj is IMultiLineString
+				|| obj is IMultiPolygon
+				|| obj is IGeometryCollection;
+		}
 
-        public GeoJsonObjectType GetGeoJsonObjectType(object obj)
-        {
-            if (obj is IPoint)
-                return GeoJsonObjectType.Point;
-            if (obj is ILineString)
-                return GeoJsonObjectType.LineString;
-            if (obj is IPolygon)
-                return GeoJsonObjectType.Polygon;
-            if (obj is IMultiPoint)
-                return GeoJsonObjectType.MultiPoint;
-            if (obj is IMultiLineString)
-                return GeoJsonObjectType.MultiLineString;
-            if (obj is IMultiPolygon)
-                return GeoJsonObjectType.MultiPolygon;
-            if (obj is IGeometryCollection)
-                return GeoJsonObjectType.GeometryCollection;
+		public GeoJsonObjectType GetGeoJsonObjectType(object obj)
+		{
+			if (obj is IPoint)
+				return GeoJsonObjectType.Point;
+			if (obj is ILineString)
+				return GeoJsonObjectType.LineString;
+			if (obj is IPolygon)
+				return GeoJsonObjectType.Polygon;
+			if (obj is IMultiPoint)
+				return GeoJsonObjectType.MultiPoint;
+			if (obj is IMultiLineString)
+				return GeoJsonObjectType.MultiLineString;
+			if (obj is IMultiPolygon)
+				return GeoJsonObjectType.MultiPolygon;
+			if (obj is IGeometryCollection)
+				return GeoJsonObjectType.GeometryCollection;
 
-            throw new ArgumentException("geom");
-        }
+			throw new ArgumentException("geom");
+		}
 
-        public WktObjectType GetWktObjectType(object obj)
-        {
-            if (obj is IPoint)
-                return WktObjectType.Point;
-            if (obj is ILineString)
-                return WktObjectType.LineString;
-            if (obj is IPolygon)
-                return WktObjectType.Polygon;
-            if (obj is IMultiPoint)
-                return WktObjectType.MultiPoint;
-            if (obj is IMultiLineString)
-                return WktObjectType.MultiLineString;
-            if (obj is IMultiPolygon)
-                return WktObjectType.MultiPolygon;
-            if (obj is IGeometryCollection)
-                return WktObjectType.GeometryCollection;
+		public WktObjectType GetWktObjectType(object obj)
+		{
+			if (obj is IPoint)
+				return WktObjectType.Point;
+			if (obj is ILineString)
+				return WktObjectType.LineString;
+			if (obj is IPolygon)
+				return WktObjectType.Polygon;
+			if (obj is IMultiPoint)
+				return WktObjectType.MultiPoint;
+			if (obj is IMultiLineString)
+				return WktObjectType.MultiLineString;
+			if (obj is IMultiPolygon)
+				return WktObjectType.MultiPolygon;
+			if (obj is IGeometryCollection)
+				return WktObjectType.GeometryCollection;
 
-            throw new ArgumentException("obj");
-        }
+			if (obj is Envelope)
+				return WktObjectType.Envelope;
 
-        private Coordinate MakeCoordinate(CoordinateInfo coordinate)
-        {
-            if (coordinate.Z.HasValue)
-                return new Coordinate(coordinate.X, coordinate.Y, coordinate.Z.Value);
-            return new Coordinate(coordinate.X, coordinate.Y);
-        }
+			throw new ArgumentException("obj");
+		}
 
-        public object ToPoint(CoordinateInfo coordinates)
-        {
-            if (coordinates == null)
-                return Point.Empty;
-            return _geometryFactory.CreatePoint(MakeCoordinate(coordinates));
-        }
+		public bool CanConvert(WktObjectType type)
+		{
+			return type != WktObjectType.Circle
+				&& type != WktObjectType.Feature
+				&& type != WktObjectType.FeatureCollection;
+		}
 
-        public object ToLineString(CoordinateInfo[] coordinates)
-        {
-            if (coordinates.Length == 0)
-                return LineString.Empty;
-            return _geometryFactory.CreateLineString(coordinates.Select(MakeCoordinate).ToArray());
-        }
+		private Coordinate MakeCoordinate(CoordinateInfo coordinate)
+		{
+			if (coordinate.Z.HasValue)
+				return new Coordinate(coordinate.X, coordinate.Y, coordinate.Z.Value);
+			return new Coordinate(coordinate.X, coordinate.Y);
+		}
 
-        public object ToLinearRing(CoordinateInfo[] coordinates)
-        {
-            if (coordinates.Length == 0)
-                return LinearRing.Empty;
-            return _geometryFactory.CreateLinearRing(coordinates.Select(MakeCoordinate).ToArray());
-        }
+		public object ToPoint(CoordinateInfo coordinates)
+		{
+			if (coordinates == null)
+				return Point.Empty;
+			return _geometryFactory.CreatePoint(MakeCoordinate(coordinates));
+		}
 
-        public object ToPolygon(CoordinateInfo[][] coordinates)
-        {
-            if (coordinates.Length == 0)
-                return Polygon.Empty;
-            return _geometryFactory.CreatePolygon(
-                _geometryFactory.CreateLinearRing(coordinates.First().Select(MakeCoordinate).ToArray()),
-                coordinates.Skip(1).Select(x => _geometryFactory.CreateLinearRing(x.Select(MakeCoordinate).ToArray())).ToArray()
-                );
-        }
+		public object ToLineString(CoordinateInfo[] coordinates)
+		{
+			if (coordinates.Length == 0)
+				return LineString.Empty;
+			return _geometryFactory.CreateLineString(coordinates.Select(MakeCoordinate).ToArray());
+		}
 
-        public object ToMultiPoint(CoordinateInfo[] coordinates)
-        {
-            if (coordinates.Length == 0)
-                return MultiPoint.Empty;
-            return _geometryFactory.CreateMultiPoint(coordinates.Select(ToPoint).Cast<IPoint>().ToArray());
-        }
+		public object ToLinearRing(CoordinateInfo[] coordinates)
+		{
+			if (coordinates.Length == 0)
+				return LinearRing.Empty;
+			return _geometryFactory.CreateLinearRing(coordinates.Select(MakeCoordinate).ToArray());
+		}
 
-        public object ToMultiLineString(CoordinateInfo[][] coordinates)
-        {
-            if (coordinates.Length == 0)
-                return MultiLineString.Empty;
-            return _geometryFactory.CreateMultiLineString(coordinates.Select(ToLineString).Cast<IBasicLineString>().ToArray());
-        }
+		public object ToPolygon(CoordinateInfo[][] coordinates)
+		{
+			if (coordinates.Length == 0)
+				return Polygon.Empty;
+			return _geometryFactory.CreatePolygon(
+				_geometryFactory.CreateLinearRing(coordinates.First().Select(MakeCoordinate).ToArray()),
+				coordinates.Skip(1).Select(x => _geometryFactory.CreateLinearRing(x.Select(MakeCoordinate).ToArray())).ToArray()
+				);
+		}
 
-        public object ToMultiPolygon(CoordinateInfo[][][] coordinates)
-        {
-            if (coordinates.Length == 0)
-                return MultiPolygon.Empty;
-            return _geometryFactory.CreateMultiPolygon(coordinates.Select(ToPolygon).Cast<IPolygon>().ToArray());
-        }
+		public object ToMultiPoint(CoordinateInfo[] coordinates)
+		{
+			if (coordinates.Length == 0)
+				return MultiPoint.Empty;
+			return _geometryFactory.CreateMultiPoint(coordinates.Select(ToPoint).Cast<IPoint>().ToArray());
+		}
 
-        public object ToGeometryCollection(object[] geometries)
-        {
-            if (geometries.Length == 0)
-                return GeometryCollection.Empty;
-            return _geometryFactory.CreateGeometryCollection(geometries.Cast<IGeometry>().ToArray());
-        }
+		public object ToMultiLineString(CoordinateInfo[][] coordinates)
+		{
+			if (coordinates.Length == 0)
+				return MultiLineString.Empty;
+			return _geometryFactory.CreateMultiLineString(coordinates.Select(ToLineString).Cast<IBasicLineString>().ToArray());
+		}
 
-        public object ToFeature(object geometry, object id, Dictionary<string, object> properties)
-        {
-            throw new NotImplementedException();
-        }
+		public object ToMultiPolygon(CoordinateInfo[][][] coordinates)
+		{
+			if (coordinates.Length == 0)
+				return MultiPolygon.Empty;
+			return _geometryFactory.CreateMultiPolygon(coordinates.Select(ToPolygon).Cast<IPolygon>().ToArray());
+		}
 
-        public object ToFeatureCollection(object[] features)
-        {
-            throw new NotImplementedException();
-        }
+		public object ToGeometryCollection(object[] geometries)
+		{
+			if (geometries.Length == 0)
+				return GeometryCollection.Empty;
+			return _geometryFactory.CreateGeometryCollection(geometries.Cast<IGeometry>().ToArray());
+		}
 
-        private CoordinateInfo MakeCoordinate(Coordinate coordinate)
-        {
-            return new CoordinateInfo
-            {
-                X = coordinate.X,
-                Y = coordinate.Y,
-                Z = double.IsNaN(coordinate.Z) ? (double?)null : coordinate.Z
-            };
-        }
+		public object ToFeature(object geometry, object id, Dictionary<string, object> properties)
+		{
+			throw new NotImplementedException();
+		}
 
-        public CoordinateInfo FromPoint(object point)
-        {
-            if (((IPoint)point).IsEmpty)
-                return null;
-            return MakeCoordinate(((IPoint)point).Coordinate);
-        }
+		public object ToFeatureCollection(object[] features)
+		{
+			throw new NotImplementedException();
+		}
 
-        public CoordinateInfo[] FromLineString(object lineString)
-        {
-            if (((ILineString)lineString).IsEmpty)
-                return new CoordinateInfo[0];
-            return ((ILineString)lineString).Coordinates.Select(MakeCoordinate).ToArray();
-        }
+		public object ToEnvelope(CoordinateInfo[] coordinates)
+		{
+			if (coordinates == null || coordinates.Length != 2)
+				return null;
 
-        public CoordinateInfo[] FromLinearRing(object lineString)
-        {
-            if (((ILinearRing)lineString).IsEmpty)
-                return new CoordinateInfo[0];
-            return ((ILinearRing)lineString).Coordinates.Select(MakeCoordinate).ToArray();
-        }
+			return new Envelope(MakeCoordinate(coordinates[0]), MakeCoordinate(coordinates[1]));
+		}
 
-        public CoordinateInfo[][] FromPolygon(object polygon)
-        {
-            if (((IPolygon)polygon).IsEmpty)
-                return new CoordinateInfo[0][];
+		public object ToCircle(double[] circle)
+		{
+			throw new NotImplementedException();
+		}
 
-            var p = (IPolygon)polygon;
-            var list = new List<CoordinateInfo[]>();
-            list.Add(p.Shell.Coordinates.Select(MakeCoordinate).ToArray());
-            list.AddRange(p.Holes.Select(x => x.Coordinates.Select(MakeCoordinate).ToArray()).ToArray());
-            return list.ToArray();
-        }
+		private CoordinateInfo MakeCoordinate(Coordinate coordinate)
+		{
+			return new CoordinateInfo
+			{
+				X = coordinate.X,
+				Y = coordinate.Y,
+				Z = double.IsNaN(coordinate.Z) ? (double?)null : coordinate.Z
+			};
+		}
 
-        public CoordinateInfo[] FromMultiPoint(object multiPoint)
-        {
-            if (((IMultiPoint)multiPoint).IsEmpty)
-                return new CoordinateInfo[0];
+		public CoordinateInfo FromPoint(object point)
+		{
+			if (((IPoint)point).IsEmpty)
+				return null;
+			return MakeCoordinate(((IPoint)point).Coordinate);
+		}
 
-            return ((IMultiPoint)multiPoint).Geometries.Cast<IPoint>().Select(FromPoint).ToArray();
-        }
+		public CoordinateInfo[] FromLineString(object lineString)
+		{
+			if (((ILineString)lineString).IsEmpty)
+				return new CoordinateInfo[0];
+			return ((ILineString)lineString).Coordinates.Select(MakeCoordinate).ToArray();
+		}
 
-        public CoordinateInfo[][] FromMultiLineString(object multiLineString)
-        {
-            if (((IMultiLineString)multiLineString).IsEmpty)
-                return new CoordinateInfo[0][];
+		public CoordinateInfo[] FromLinearRing(object lineString)
+		{
+			if (((ILinearRing)lineString).IsEmpty)
+				return new CoordinateInfo[0];
+			return ((ILinearRing)lineString).Coordinates.Select(MakeCoordinate).ToArray();
+		}
 
-            return ((IMultiLineString)multiLineString).Geometries.Cast<ILineString>().Select(FromLineString).ToArray();
-        }
+		public CoordinateInfo[][] FromPolygon(object polygon)
+		{
+			if (((IPolygon)polygon).IsEmpty)
+				return new CoordinateInfo[0][];
 
-        public CoordinateInfo[][][] FromMultiPolygon(object multiPolygon)
-        {
-            if (((IMultiPolygon)multiPolygon).IsEmpty)
-                return new CoordinateInfo[0][][];
+			var p = (IPolygon)polygon;
+			var list = new List<CoordinateInfo[]>();
+			list.Add(p.Shell.Coordinates.Select(MakeCoordinate).ToArray());
+			list.AddRange(p.Holes.Select(x => x.Coordinates.Select(MakeCoordinate).ToArray()).ToArray());
+			return list.ToArray();
+		}
 
-            return ((IMultiPolygon)multiPolygon).Geometries.Cast<IPolygon>().Select(FromPolygon).ToArray();
-        }
+		public CoordinateInfo[] FromMultiPoint(object multiPoint)
+		{
+			if (((IMultiPoint)multiPoint).IsEmpty)
+				return new CoordinateInfo[0];
 
-        public object[] FromGeometryCollection(object geometryCollection)
-        {
-            return ((IGeometryCollection)geometryCollection).Geometries.Cast<object>().ToArray();
-        }
+			return ((IMultiPoint)multiPoint).Geometries.Cast<IPoint>().Select(FromPoint).ToArray();
+		}
 
-        public object FromFeature(object feature, out object id, out Dictionary<string, object> properties)
-        {
-            throw new NotImplementedException();
-        }
+		public CoordinateInfo[][] FromMultiLineString(object multiLineString)
+		{
+			if (((IMultiLineString)multiLineString).IsEmpty)
+				return new CoordinateInfo[0][];
 
-        public object[] FromFeatureCollection(object featureCollection)
-        {
-            throw new NotImplementedException();
-        }
+			return ((IMultiLineString)multiLineString).Geometries.Cast<ILineString>().Select(FromLineString).ToArray();
+		}
+
+		public CoordinateInfo[][][] FromMultiPolygon(object multiPolygon)
+		{
+			if (((IMultiPolygon)multiPolygon).IsEmpty)
+				return new CoordinateInfo[0][][];
+
+			return ((IMultiPolygon)multiPolygon).Geometries.Cast<IPolygon>().Select(FromPolygon).ToArray();
+		}
+
+		public object[] FromGeometryCollection(object geometryCollection)
+		{
+			return ((IGeometryCollection)geometryCollection).Geometries.Cast<object>().ToArray();
+		}
+
+		public object FromFeature(object feature, out object id, out Dictionary<string, object> properties)
+		{
+			throw new NotImplementedException();
+		}
+
+		public object[] FromFeatureCollection(object featureCollection)
+		{
+			throw new NotImplementedException();
+		}
+
+		public CoordinateInfo[] FromEnvelope(object envelope)
+		{
+			var env = envelope as Envelope;
+			if (env == null)
+				return null;
+
+			return new[]
+					   {
+						   new CoordinateInfo {X = env.Minimum.X, Y = env.Minimum.Y},
+						   new CoordinateInfo {X = env.Maximum.X, Y = env.Maximum.Y},
+					   };
+		}
+
+		public double[] FromCircle(object circle)
+		{
+			throw new NotImplementedException();
+		}
 	}
 }

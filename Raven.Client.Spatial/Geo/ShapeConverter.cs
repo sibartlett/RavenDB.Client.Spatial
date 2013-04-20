@@ -64,19 +64,29 @@ namespace Raven.Client.Spatial.Geo
 			if (obj is GeometryCollection)
 				return WktObjectType.GeometryCollection;
 
+			if (obj is Circle)
+				return WktObjectType.Circle;
+			if (obj is Envelope)
+				return WktObjectType.Envelope;
+
 			throw new ArgumentException("obj");
 		}
 
-	    private Coordinate MakeCoordinate(CoordinateInfo coordinate)
-        {
-            if (coordinate.Z.HasValue && coordinate.M.HasValue)
-                return new CoordinateZM(coordinate.Y, coordinate.X, coordinate.Z.Value, coordinate.M.Value);
-            if (coordinate.Z.HasValue)
-                return new CoordinateZ(coordinate.Y, coordinate.X, coordinate.Z.Value);
-            if (coordinate.M.HasValue)
-                return new CoordinateM(coordinate.Y, coordinate.X, coordinate.M.Value);
-            return new Coordinate(coordinate.Y, coordinate.X);
-	    }
+		public bool CanConvert(WktObjectType type)
+		{
+			return true;
+		}
+
+		private Coordinate MakeCoordinate(CoordinateInfo coordinate)
+		{
+			if (coordinate.Z.HasValue && coordinate.M.HasValue)
+				return new CoordinateZM(coordinate.Y, coordinate.X, coordinate.Z.Value, coordinate.M.Value);
+			if (coordinate.Z.HasValue)
+				return new CoordinateZ(coordinate.Y, coordinate.X, coordinate.Z.Value);
+			if (coordinate.M.HasValue)
+				return new CoordinateM(coordinate.Y, coordinate.X, coordinate.M.Value);
+			return new Coordinate(coordinate.Y, coordinate.X);
+		}
 
 		public object ToPoint(CoordinateInfo coordinates)
 		{
@@ -150,42 +160,61 @@ namespace Raven.Client.Spatial.Geo
 			return new FeatureCollection(features.Cast<Feature>());
 		}
 
-	    private CoordinateInfo MakeCoordinate(Coordinate coordinate)
-        {
-            return new CoordinateInfo()
-            {
-                X = coordinate.Longitude,
-                Y = coordinate.Latitude,
-                Z = coordinate.Is3D ? ((Is3D)coordinate).Elevation : (double?)null,
-                M = coordinate.IsMeasured ? ((IsMeasured)coordinate).Measure : (double?)null
-            };
-	    }
+		public object ToEnvelope(CoordinateInfo[] coordinates)
+		{
+			if (coordinates == null || coordinates.Length != 2)
+				return null;
+			return new Envelope(coordinates[0].Y, coordinates[0].X, coordinates[1].Y, coordinates[1].X);
+		}
+
+		public object ToCircle(double[] circle)
+		{
+			if (circle == null || circle.Length != 3)
+				return null;
+			return new Circle(circle[0], circle[1], ConvertToCircleRadius(circle[2]));
+		}
+
+		protected virtual double ConvertToCircleRadius(double radius)
+		{
+			return radius.ToDegrees() * Constants.EarthMeanRadius;
+		}
+
+		private CoordinateInfo MakeCoordinate(Coordinate coordinate)
+		{
+			return new CoordinateInfo()
+			{
+				X = coordinate.Longitude,
+				Y = coordinate.Latitude,
+				Z = coordinate.Is3D ? ((Is3D)coordinate).Elevation : (double?)null,
+				M = coordinate.IsMeasured ? ((IsMeasured)coordinate).Measure : (double?)null
+			};
+		}
 
 		public CoordinateInfo FromPoint(object point)
 		{
 			if (((Point)point).IsEmpty)
-                return null;
+				return null;
 			return MakeCoordinate(((Point)point).Coordinate);
 		}
 
 		public CoordinateInfo[] FromLineString(object lineString)
 		{
 			if (((LineString)lineString).IsEmpty)
-                return new CoordinateInfo[0];
+				return new CoordinateInfo[0];
 			return ((LineString) lineString).Coordinates.Select(MakeCoordinate).ToArray();
 		}
 
 		public CoordinateInfo[] FromLinearRing(object lineString)
 		{
 			if (((LinearRing)lineString).IsEmpty)
-                return new CoordinateInfo[0];
+				return new CoordinateInfo[0];
 			return ((LinearRing)lineString).Coordinates.Select(MakeCoordinate).ToArray();
 		}
 
 		public CoordinateInfo[][] FromPolygon(object polygon)
 		{
 			if (((Polygon)polygon).IsEmpty)
-                return new CoordinateInfo[0][];
+				return new CoordinateInfo[0][];
 
 			var p = (Polygon) polygon;
 			var list = new List<CoordinateInfo[]>();
@@ -197,7 +226,7 @@ namespace Raven.Client.Spatial.Geo
 		public CoordinateInfo[] FromMultiPoint(object multiPoint)
 		{
 			if (((MultiPoint)multiPoint).IsEmpty)
-                return new CoordinateInfo[0];
+				return new CoordinateInfo[0];
 
 			return ((MultiPoint) multiPoint).Geometries.Cast<Point>().Select(FromPoint).ToArray();
 		}
@@ -205,7 +234,7 @@ namespace Raven.Client.Spatial.Geo
 		public CoordinateInfo[][] FromMultiLineString(object multiLineString)
 		{
 			if (((MultiLineString)multiLineString).IsEmpty)
-                return new CoordinateInfo[0][];
+				return new CoordinateInfo[0][];
 
 			return ((MultiLineString) multiLineString).Geometries.Cast<LineString>().Select(FromLineString).ToArray();
 		}
@@ -213,7 +242,7 @@ namespace Raven.Client.Spatial.Geo
 		public CoordinateInfo[][][] FromMultiPolygon(object multiPolygon)
 		{
 			if (((MultiPolygon)multiPolygon).IsEmpty)
-                return new CoordinateInfo[0][][];
+				return new CoordinateInfo[0][][];
 
 			return ((MultiPolygon)multiPolygon).Geometries.Cast<Polygon>().Select(FromPolygon).ToArray();
 		}
@@ -234,6 +263,33 @@ namespace Raven.Client.Spatial.Geo
 		public object[] FromFeatureCollection(object featureCollection)
 		{
 			return ((FeatureCollection) featureCollection).Features.Cast<object>().ToArray();
+		}
+
+		public CoordinateInfo[] FromEnvelope(object envelope)
+		{
+			var env = envelope as Envelope;
+			if (env == null)
+				return null;
+
+			return new[]
+					   {
+						   new CoordinateInfo { X = env.MinLon, Y = env.MinLat },
+						   new CoordinateInfo { X = env.MaxLon, Y = env.MaxLat }
+					   };
+		}
+
+		public double[] FromCircle(object circle)
+		{
+			var cir = circle as Circle;
+			if (cir == null)
+				return null;
+
+			return new[]{ cir.Center.Latitude, cir.Center.Latitude, ConvertFromCircleRadius(cir.Radius) };
+		}
+
+		protected virtual double ConvertFromCircleRadius(double radius)
+		{
+			return (radius / Constants.EarthMeanRadius).ToDegrees();
 		}
 	}
 }
