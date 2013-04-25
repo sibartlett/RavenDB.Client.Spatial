@@ -31,8 +31,8 @@ namespace Raven.Client.Spatial
 
 		private bool TryWriteCircle(object shape, out string result)
 		{
-			if (_shapeConverter.CanConvert(WktObjectType.Circle) &&
-				_shapeConverter.GetWktObjectType(shape) == WktObjectType.Circle)
+			if (_shapeConverter.CanConvert(ObjectType.Circle) &&
+				_shapeConverter.GetObjectType(shape) == ObjectType.Circle)
 			{
 				var circle = _shapeConverter.FromCircle(shape);
 				result = string.Format(CultureInfo.InvariantCulture, "CIRCLE({0:F9} {1:F9} d={2:F9})", circle[0], circle[1], circle[2]);
@@ -44,10 +44,10 @@ namespace Raven.Client.Spatial
 
 		private bool TryWriteEnvelope(object shape, out string result)
 		{
-			var a = _shapeConverter.CanConvert(WktObjectType.Envelope);
-			var b = _shapeConverter.GetWktObjectType(shape) == WktObjectType.Envelope;
-			if (_shapeConverter.CanConvert(WktObjectType.Envelope) &&
-				_shapeConverter.GetWktObjectType(shape) == WktObjectType.Envelope)
+			var a = _shapeConverter.CanConvert(ObjectType.Envelope);
+			var b = _shapeConverter.GetObjectType(shape) == ObjectType.Envelope;
+			if (_shapeConverter.CanConvert(ObjectType.Envelope) &&
+				_shapeConverter.GetObjectType(shape) == ObjectType.Envelope)
 			{
 				var envelope = _shapeConverter.FromEnvelope(shape);
 				result = string.Format(CultureInfo.InvariantCulture, "{0:F9} {1:F9} {2:F9} {3:F9}", envelope[0].X, envelope[0].Y, envelope[1].X, envelope[1].Y);

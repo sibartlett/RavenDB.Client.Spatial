@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Raven.Imports.Newtonsoft.Json;
 
 namespace Raven.Client.Spatial
@@ -26,21 +27,86 @@ namespace Raven.Client.Spatial
 			if (TryWriteGeometryCollection(writer, value, serializer))
 				return;
 
+			if (TryWriteFeature(writer, value, serializer))
+				return;
+
+			if (TryWriteFeatureCollection(writer, value, serializer))
+				return;
+
 			throw new Exception("Error!");
 		}
 
-		public bool TryWriteGeometryCollection(JsonWriter writer, object value, JsonSerializer serializer)
+		public bool TryWriteFeature(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			if (!_shapeConverter.IsValid(value))
+			if (!_shapeConverter.CanConvert(ObjectType.Feature))
 				return false;
 
-			GeoJsonObjectType geomType = _shapeConverter.GetGeoJsonObjectType(value);
-			if (geomType != GeoJsonObjectType.GeometryCollection)
+			ObjectType geomType = _shapeConverter.GetObjectType(value);
+			if (geomType != ObjectType.Feature)
 				return false;
 
 			writer.WriteStartObject();
 			writer.WritePropertyName("type");
-			writer.WriteValue(Enum.GetName(typeof(GeoJsonObjectType), geomType));
+			writer.WriteValue(Enum.GetName(typeof(ObjectType), ObjectType.Feature));
+
+			object id;
+			Dictionary<string, object> props;
+			var geometry = _shapeConverter.FromFeature(value, out id, out props);
+
+			if (id != null)
+			{
+				writer.WritePropertyName("id");
+				serializer.Serialize(writer, id);
+			}
+
+			if (props != null && props.Count > 0)
+			{
+				writer.WritePropertyName("properties");
+				serializer.Serialize(writer, props);
+			}
+
+			writer.WritePropertyName("geometry");
+			serializer.Serialize(writer, geometry);
+
+			writer.WriteEndObject();
+			return true;
+		}
+
+		public bool TryWriteFeatureCollection(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			if (!_shapeConverter.CanConvert(ObjectType.FeatureCollection))
+				return false;
+
+			ObjectType geomType = _shapeConverter.GetObjectType(value);
+			if (geomType != ObjectType.FeatureCollection)
+				return false;
+
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteValue(Enum.GetName(typeof(ObjectType), ObjectType.FeatureCollection));
+
+			writer.WritePropertyName("features");
+			writer.WriteStartArray();
+			foreach (var feature in _shapeConverter.FromFeatureCollection(value))
+				serializer.Serialize(writer, feature);
+			writer.WriteEndArray();
+
+			writer.WriteEndObject();
+			return true;
+		}
+
+		public bool TryWriteGeometryCollection(JsonWriter writer, object value, JsonSerializer serializer)
+		{
+			if (!_shapeConverter.CanConvert(ObjectType.GeometryCollection))
+				return false;
+
+			ObjectType geomType = _shapeConverter.GetObjectType(value);
+			if (geomType != ObjectType.GeometryCollection)
+				return false;
+
+			writer.WriteStartObject();
+			writer.WritePropertyName("type");
+			writer.WriteValue(Enum.GetName(typeof(ObjectType), geomType));
 
 			writer.WritePropertyName("geometries");
 			writer.WriteStartArray();
@@ -54,19 +120,19 @@ namespace Raven.Client.Spatial
 
 		public bool TryWriteGeometry(JsonWriter writer, object value, JsonSerializer serializer)
 		{
-			if (! _shapeConverter.IsValid(value))
-				return false;
+			ObjectType geomType = _shapeConverter.GetObjectType(value);
 
-			GeoJsonObjectType geomType = _shapeConverter.GetGeoJsonObjectType(value);
+			if (!_shapeConverter.CanConvert(geomType))
+				return false;
 
 			switch (geomType)
 			{
-				case GeoJsonObjectType.Point:
-				case GeoJsonObjectType.LineString:
-				case GeoJsonObjectType.Polygon:
-				case GeoJsonObjectType.MultiPoint:
-				case GeoJsonObjectType.MultiLineString:
-				case GeoJsonObjectType.MultiPolygon:
+				case ObjectType.Point:
+				case ObjectType.LineString:
+				case ObjectType.Polygon:
+				case ObjectType.MultiPoint:
+				case ObjectType.MultiLineString:
+				case ObjectType.MultiPolygon:
 					break;
 				default:
 					return false;
@@ -74,32 +140,32 @@ namespace Raven.Client.Spatial
 
 			writer.WriteStartObject();
 			writer.WritePropertyName("type");
-			writer.WriteValue(Enum.GetName(typeof(GeoJsonObjectType), geomType));
+			writer.WriteValue(Enum.GetName(typeof(ObjectType), geomType));
 
 			writer.WritePropertyName("coordinates");
 
 			switch (geomType)
 			{
-				case GeoJsonObjectType.Point:
+				case ObjectType.Point:
 					WriteJsonCoordinate(writer, _shapeConverter.FromPoint(value));
 					break;
-				case GeoJsonObjectType.LineString:
+				case ObjectType.LineString:
 					WriteJsonCoordinates(writer, _shapeConverter.FromLineString(value));
 					break;
 
-				case GeoJsonObjectType.MultiPoint:
+				case ObjectType.MultiPoint:
 					WriteJsonCoordinates(writer, _shapeConverter.FromMultiPoint(value));
 					break;
 
-				case GeoJsonObjectType.Polygon:
+				case ObjectType.Polygon:
 					WriteJsonCoordinatesEnumerable(writer, _shapeConverter.FromPolygon(value));
 					break;
 
-				case GeoJsonObjectType.MultiLineString:
+				case ObjectType.MultiLineString:
 					WriteJsonCoordinatesEnumerable(writer, _shapeConverter.FromMultiLineString(value));
 					break;
 
-				case GeoJsonObjectType.MultiPolygon:
+				case ObjectType.MultiPolygon:
 					WriteJsonCoordinatesEnumerable2(writer, _shapeConverter.FromMultiPolygon(value));
 					break;
 			}

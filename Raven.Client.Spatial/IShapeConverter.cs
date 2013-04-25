@@ -4,11 +4,9 @@ namespace Raven.Client.Spatial
 {
 	internal interface IShapeConverter
 	{
-		bool IsValid(object obj);
-		GeoJsonObjectType GetGeoJsonObjectType(object obj);
-		WktObjectType GetWktObjectType(object obj);
+		ObjectType GetObjectType(object obj);
 
-		bool CanConvert(WktObjectType type);
+		bool CanConvert(ObjectType type);
 
 		object ToPoint(CoordinateInfo coordinates);
 		object ToLineString(CoordinateInfo[] coordinates);

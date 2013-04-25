@@ -17,78 +17,43 @@ namespace Raven.Client.Spatial.NetTopologySuite
 			_geometryFactory = geometryFactory;
 		}
 
-		public bool IsValid(object obj)
-		{
-			return obj is IPoint
-				|| obj is ILineString
-				|| obj is IPolygon
-				|| obj is IMultiPoint
-				|| obj is IMultiLineString
-				|| obj is IMultiPolygon
-				|| obj is IGeometryCollection
-				|| obj is Feature
-#if !SILVERLIGHT
-				|| obj is FeatureCollection
-#endif
-				;
-		}
-
-		public GeoJsonObjectType GetGeoJsonObjectType(object obj)
+		public ObjectType GetObjectType(object obj)
 		{
 			if (obj is IPoint)
-				return GeoJsonObjectType.Point;
+				return ObjectType.Point;
 			if (obj is ILineString)
-				return GeoJsonObjectType.LineString;
+				return ObjectType.LineString;
 			if (obj is IPolygon)
-				return GeoJsonObjectType.Polygon;
+				return ObjectType.Polygon;
 			if (obj is IMultiPoint)
-				return GeoJsonObjectType.MultiPoint;
+				return ObjectType.MultiPoint;
 			if (obj is IMultiLineString)
-				return GeoJsonObjectType.MultiLineString;
+				return ObjectType.MultiLineString;
 			if (obj is IMultiPolygon)
-				return GeoJsonObjectType.MultiPolygon;
+				return ObjectType.MultiPolygon;
 			if (obj is IGeometryCollection)
-				return GeoJsonObjectType.GeometryCollection;
+				return ObjectType.GeometryCollection;
+
 			if (obj is Feature)
-				return GeoJsonObjectType.Feature;
+				return ObjectType.Feature;
 #if !SILVERLIGHT
 			if (obj is FeatureCollection)
-				return GeoJsonObjectType.FeatureCollection;
+				return ObjectType.FeatureCollection;
 #endif
 
-			throw new ArgumentException("geom");
-		}
-
-		public WktObjectType GetWktObjectType(object obj)
-		{
-			if (obj is IPoint)
-				return WktObjectType.Point;
-			if (obj is ILineString)
-				return WktObjectType.LineString;
-			if (obj is IPolygon)
-				return WktObjectType.Polygon;
-			if (obj is IMultiPoint)
-				return WktObjectType.MultiPoint;
-			if (obj is IMultiLineString)
-				return WktObjectType.MultiLineString;
-			if (obj is IMultiPolygon)
-				return WktObjectType.MultiPolygon;
-			if (obj is IGeometryCollection)
-				return WktObjectType.GeometryCollection;
-
 			if (obj is Envelope)
-				return WktObjectType.Envelope;
+				return ObjectType.Envelope;
 
 			throw new ArgumentException("obj");
 		}
 
-		public bool CanConvert(WktObjectType type)
+		public bool CanConvert(ObjectType type)
 		{
-			return type != WktObjectType.Circle
+			return type != ObjectType.Circle
 #if SILVERLIGHT
-				&& type != WktObjectType.FeatureCollection
+				&& type != ObjectType.FeatureCollection
 #endif
-				;
+;
 		}
 
 		private Coordinate MakeCoordinate(CoordinateInfo coordinate)

@@ -1,5 +1,6 @@
 using System;
 using GeoAPI.Geometries;
+using NetTopologySuite.Features;
 using NetTopologySuite.Geometries;
 using Raven.Imports.Newtonsoft.Json;
 
@@ -23,7 +24,12 @@ namespace Raven.Client.Spatial.NetTopologySuite
 
 		public override bool CanConvert(Type objectType)
 		{
-			return typeof(IGeometry).IsAssignableFrom(objectType);
+			return typeof(IGeometry).IsAssignableFrom(objectType)
+				|| objectType == typeof(Feature)
+#if !SILVERLIGHT
+				|| objectType == typeof(FeatureCollection)
+#endif
+				;
 		}
 
 		public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)

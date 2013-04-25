@@ -1,6 +1,6 @@
 ﻿namespace Raven.Client.Spatial
 {
-	internal enum WktObjectType
+	internal enum ObjectType
 	{
 		Point,
 		MultiPoint,

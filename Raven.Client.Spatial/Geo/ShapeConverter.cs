@@ -10,69 +10,38 @@ namespace Raven.Client.Spatial.Geo
 {
 	internal class ShapeConverter : IShapeConverter
 	{
-		public bool IsValid(object obj)
-		{
-			return obj is Point
-				|| obj is LineString
-				|| obj is Polygon
-				|| obj is MultiPoint
-				|| obj is MultiLineString
-				|| obj is MultiPolygon
-				|| obj is GeometryCollection
-				|| obj is Feature
-				|| obj is FeatureCollection;
-		}
 
-		public GeoJsonObjectType GetGeoJsonObjectType(object obj)
+		public ObjectType GetObjectType(object obj)
 		{
 			if (obj is Point)
-				return GeoJsonObjectType.Point;
+				return ObjectType.Point;
 			if (obj is LineString)
-				return GeoJsonObjectType.LineString;
+				return ObjectType.LineString;
 			if (obj is Polygon)
-				return GeoJsonObjectType.Polygon;
+				return ObjectType.Polygon;
 			if (obj is MultiPoint)
-				return GeoJsonObjectType.MultiPoint;
+				return ObjectType.MultiPoint;
 			if (obj is MultiLineString)
-				return GeoJsonObjectType.MultiLineString;
+				return ObjectType.MultiLineString;
 			if (obj is MultiPolygon)
-				return GeoJsonObjectType.MultiPolygon;
+				return ObjectType.MultiPolygon;
 			if (obj is GeometryCollection)
-				return GeoJsonObjectType.GeometryCollection;
+				return ObjectType.GeometryCollection;
+
 			if (obj is Feature)
-				return GeoJsonObjectType.Feature;
+				return ObjectType.Feature;
 			if (obj is FeatureCollection)
-				return GeoJsonObjectType.FeatureCollection;
-
-			throw new ArgumentException("obj");
-		}
-
-		public WktObjectType GetWktObjectType(object obj)
-		{
-			if (obj is Point)
-				return WktObjectType.Point;
-			if (obj is LineString)
-				return WktObjectType.LineString;
-			if (obj is Polygon)
-				return WktObjectType.Polygon;
-			if (obj is MultiPoint)
-				return WktObjectType.MultiPoint;
-			if (obj is MultiLineString)
-				return WktObjectType.MultiLineString;
-			if (obj is MultiPolygon)
-				return WktObjectType.MultiPolygon;
-			if (obj is GeometryCollection)
-				return WktObjectType.GeometryCollection;
+				return ObjectType.FeatureCollection;
 
 			if (obj is Circle)
-				return WktObjectType.Circle;
+				return ObjectType.Circle;
 			if (obj is Envelope)
-				return WktObjectType.Envelope;
+				return ObjectType.Envelope;
 
 			throw new ArgumentException("obj");
 		}
 
-		public bool CanConvert(WktObjectType type)
+		public bool CanConvert(ObjectType type)
 		{
 			return true;
 		}

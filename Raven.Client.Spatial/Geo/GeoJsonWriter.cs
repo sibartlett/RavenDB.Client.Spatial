@@ -43,7 +43,7 @@ namespace Raven.Client.Spatial.Geo
 				writer.WriteEndObject();
 
 				writer.WritePropertyName("type");
-				writer.WriteValue(Enum.GetName(typeof(GeoJsonObjectType), GeoJsonObjectType.LineString));
+				writer.WriteValue(Enum.GetName(typeof(ObjectType), ObjectType.LineString));
 
 				writer.WritePropertyName("coordinates");
 				WriteJsonCoordinates(writer, _shapeConverter.FromLineString(route.ToLineString()));
@@ -81,7 +81,7 @@ namespace Raven.Client.Spatial.Geo
 				writer.WriteEndObject();
 
 				writer.WritePropertyName("type");
-				writer.WriteValue(Enum.GetName(typeof(GeoJsonObjectType), GeoJsonObjectType.LineString));
+				writer.WriteValue(Enum.GetName(typeof(ObjectType), ObjectType.LineString));
 
 				writer.WritePropertyName("coordinates");
 				WriteJsonCoordinates(writer, _shapeConverter.FromLineString(track.ToLineString()));

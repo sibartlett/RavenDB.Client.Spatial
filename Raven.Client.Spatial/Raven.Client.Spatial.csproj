@@ -71,7 +71,6 @@
     <Compile Include="DotSpatial\GeoJsonConverter.cs" />
     <Compile Include="DotSpatial\ShapeConverter.cs" />
     <Compile Include="DotSpatial\WktConverter.cs" />
-    <Compile Include="GeoJsonObjectType.cs" />
     <Compile Include="GeoJsonReader.cs" />
     <Compile Include="GeoJsonWriter.cs" />
     <Compile Include="Geo\GeoJsonConverter.cs" />
@@ -87,7 +86,7 @@
     <Compile Include="NetTopologySuite\ShapeConverter.cs" />
     <Compile Include="NetTopologySuite\WktConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WktObjectType.cs" />
+    <Compile Include="ObjectType.cs" />
     <Compile Include="WktReader.cs">
       <SubType>Code</SubType>
     </Compile>

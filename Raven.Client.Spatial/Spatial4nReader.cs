@@ -43,7 +43,7 @@ namespace Raven.Client.Spatial
 
 		private bool TryReadCircle(string value, out object result)
 		{
-			if (!_shapeConverter.CanConvert(WktObjectType.Circle))
+			if (!_shapeConverter.CanConvert(ObjectType.Circle))
 			{
 				result = null;
 				return false;
@@ -104,7 +104,7 @@ namespace Raven.Client.Spatial
 
 		private bool TryReadEnvelope(string value, out object result)
 		{
-			if (!_shapeConverter.CanConvert(WktObjectType.Envelope))
+			if (!_shapeConverter.CanConvert(ObjectType.Envelope))
 			{
 				result = null;
 				return false;
