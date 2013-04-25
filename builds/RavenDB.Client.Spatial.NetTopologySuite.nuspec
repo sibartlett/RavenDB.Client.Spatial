@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>RavenDB.Client.Spatial.NetTopologySuite</id>
-        <version>0.3.0</version>
+        <version>0.6.0-Raven25</version>
         <title>RavenDB JsonConverters for NetTopologySuite</title>
         <authors>Simon Bartlett</authors>
         <owners>Simon Bartlett</owners>
@@ -12,7 +12,7 @@
         <dependencies>
             <group>
                 <dependency id="NetTopologySuite" version="1.13.0" />
-                <dependency id="RavenDB.Client" version="2.0.2330" />
+                <dependency id="RavenDB.Client" version="2.5.2559-Unstable" />
             </group>
         </dependencies>
         <tags>ravendb raven ravendbspatial spatial gps coordinates wgs84 geography geo NetTopologySuite nts</tags>
@@ -21,8 +21,6 @@
     <files>
         <file src="NetTopologySuite\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\net40\Raven.Client.Spatial.NetTopologySuite.dll" />
         <file src="NetTopologySuite\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\net40\Raven.Client.Spatial.NetTopologySuite.pdb" />
-        <file src="NetTopologySuite.Silverlight4\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\sl40\Raven.Client.Spatial.NetTopologySuite.dll" />
-        <file src="NetTopologySuite.Silverlight4\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\sl40\Raven.Client.Spatial.NetTopologySuite.pdb" />
         <file src="NetTopologySuite.Silverlight5\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\sl50\Raven.Client.Spatial.NetTopologySuite.dll" />
         <file src="NetTopologySuite.Silverlight5\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\sl50\Raven.Client.Spatial.NetTopologySuite.pdb" />
     </files>

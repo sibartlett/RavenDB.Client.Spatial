@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>RavenDB.Client.Spatial.Geo</id>
-        <version>0.3.0</version>
+        <version>0.6.0-Raven25</version>
         <title>RavenDB JsonConverters for Geo</title>
         <authors>Simon Bartlett</authors>
         <owners>Simon Bartlett</owners>
@@ -12,7 +12,7 @@
         <dependencies>
             <group>
                 <dependency id="Geo" version="0.10.1" />
-                <dependency id="RavenDB.Client" version="2.0.2330" />
+                <dependency id="RavenDB.Client" version="2.5.2559-Unstable" />
             </group>
         </dependencies>
         <tags>ravendb raven ravendbspatial spatial gps coordinates wgs84 geography geo</tags>
@@ -21,8 +21,6 @@
     <files>
         <file src="Geo\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\net40\Raven.Client.Spatial.Geo.dll" />
         <file src="Geo\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\net40\Raven.Client.Spatial.Geo.pdb" />
-        <file src="Geo.Silverlight4\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\sl40\Raven.Client.Spatial.Geo.dll" />
-        <file src="Geo.Silverlight4\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\sl40\Raven.Client.Spatial.Geo.pdb" />
         <file src="Geo.Silverlight5\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\sl50\Raven.Client.Spatial.Geo.dll" />
         <file src="Geo.Silverlight5\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\sl50\Raven.Client.Spatial.Geo.pdb" />
     </files>
