@@ -48,24 +48,29 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="GeoAPI.Silverlight">
-      <HintPath>..\..\packages\GeoAPI.1.7.1\lib\sl40\GeoAPI.Silverlight.dll</HintPath>
+    <Reference Include="GeoAPI.Silverlight, Version=1.7.1.0, Culture=neutral, PublicKeyToken=a1a0da7def465678, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\GeoAPI.1.7.1.1\lib\sl40\GeoAPI.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CompilerServices.AsyncTargetingPack.Silverlight5">
       <HintPath>..\..\packages\Microsoft.CompilerServices.AsyncTargetingPack.1.0.1\lib\sl50\Microsoft.CompilerServices.AsyncTargetingPack.Silverlight5.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
-    <Reference Include="NetTopologySuite.Data.Silverlight">
-      <HintPath>..\..\packages\NetTopologySuite.1.13.0\lib\sl40\NetTopologySuite.Data.Silverlight.dll</HintPath>
+    <Reference Include="NetTopologySuite.Data.Silverlight, Version=1.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NetTopologySuite.1.13.1\lib\sl40\NetTopologySuite.Data.Silverlight.dll</HintPath>
     </Reference>
-    <Reference Include="NetTopologySuite.Encodings.Silverlight">
-      <HintPath>..\..\packages\NetTopologySuite.1.13.0\lib\sl40\NetTopologySuite.Encodings.Silverlight.dll</HintPath>
+    <Reference Include="NetTopologySuite.Encodings.Silverlight, Version=1.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NetTopologySuite.1.13.1\lib\sl40\NetTopologySuite.Encodings.Silverlight.dll</HintPath>
     </Reference>
-    <Reference Include="NetTopologySuite.Silverlight">
-      <HintPath>..\..\packages\NetTopologySuite.1.13.0\lib\sl40\NetTopologySuite.Silverlight.dll</HintPath>
+    <Reference Include="NetTopologySuite.Silverlight, Version=1.13.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NetTopologySuite.1.13.1\lib\sl40\NetTopologySuite.Silverlight.dll</HintPath>
     </Reference>
-    <Reference Include="PowerCollections.SilverLight">
-      <HintPath>..\..\packages\NetTopologySuite.1.13.0\lib\sl40\PowerCollections.SilverLight.dll</HintPath>
+    <Reference Include="PowerCollections.SilverLight, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\NetTopologySuite.1.13.1\lib\sl40\PowerCollections.SilverLight.dll</HintPath>
     </Reference>
     <Reference Include="Raven.Client.Silverlight">
       <HintPath>..\..\packages\RavenDB.Client.2.5.2666\lib\sl50\Raven.Client.Silverlight.dll</HintPath>
