@@ -52,7 +52,7 @@
       <HintPath>..\..\packages\GeoAPI.1.7.1\lib\sl40\GeoAPI.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CompilerServices.AsyncTargetingPack.Silverlight5">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2559-Unstable\lib\sl50\Microsoft.CompilerServices.AsyncTargetingPack.Silverlight5.dll</HintPath>
+      <HintPath>..\..\packages\Microsoft.CompilerServices.AsyncTargetingPack.1.0.1\lib\sl50\Microsoft.CompilerServices.AsyncTargetingPack.Silverlight5.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib" />
     <Reference Include="NetTopologySuite.Data.Silverlight">
@@ -67,9 +67,8 @@
     <Reference Include="PowerCollections.SilverLight">
       <HintPath>..\..\packages\NetTopologySuite.1.13.0\lib\sl40\PowerCollections.SilverLight.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Silverlight, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2559-Unstable\lib\sl50\Raven.Client.Silverlight.dll</HintPath>
+    <Reference Include="Raven.Client.Silverlight">
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2666\lib\sl50\Raven.Client.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
