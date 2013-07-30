@@ -2,7 +2,7 @@
 
 ___[NuGet Packages!](https://nuget.org/packages?q=Tags%3A%22ravendbspatial%22)___
 
-Enabling you to use third-party spatial libraries with RavenDB!
+Enabling you to use third-party spatial libraries with RavenDB 2.5+!
 
 GeoJSON and WKT JsonConverters for:
 
@@ -10,13 +10,9 @@ GeoJSON and WKT JsonConverters for:
 * [Geo](https://github.com/sibartlett/Geo)
 * [NetTopologySuite](https://code.google.com/p/nettopologysuite/)
 
-Note: As of 2.0, RavenDB only supports indexing WKT. GeoJSON support will hopefully come in [RavenDB 2.5](https://github.com/ayende/ravendb/pull/268).
-
 ## Example
 
 Here's an example of using a WKT JsonConverter with DotSpatial/Geo/NetTopologySuite. 
-
-Note: When calling SpatialGenerate in RavenDB 2.0, we have to cast to object and then to string. [RavenDB 2.5](https://github.com/ayende/ravendb/pull/268) will hopefully have better support for spatial JsonConverters.
 
 ```csharp
 public class MyClass
@@ -32,8 +28,10 @@ public class MyIndex : AbstractIndexCreationTask<MyClass>
 		Map = shapes => from doc in docs
 						select new
 						{
-							_ = SpatialGenerate("spatial", (string) (object) doc.Shape)
+							doc.Shape
 						};
+
+		Spatial(x => x.Shape, x => x.Geography.Default())
 	}
 }
 
@@ -55,7 +53,7 @@ public class Program
 			using (var session = store.OpenSession())
 			{
 				var results = session.Query<MyClass>()
-								.Customize(x => x.WithinRadiusOf(100, 0, 0))
+								.Spatial(x => x.WithinRadiusOf(100, new Point(0, 0)))
 								.ToList();
 			}
 		}
