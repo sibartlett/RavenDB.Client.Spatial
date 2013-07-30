@@ -21,5 +21,7 @@
     <files>
         <file src="DotSpatial\bin\Release\Raven.Client.Spatial.DotSpatial.dll" target="lib\net40\Raven.Client.Spatial.DotSpatial.dll" />
         <file src="DotSpatial\bin\Release\Raven.Client.Spatial.DotSpatial.pdb" target="lib\net40\Raven.Client.Spatial.DotSpatial.pdb" />
+        <file src="DotSpatial-4.5\bin\Release\Raven.Client.Spatial.DotSpatial-4.5.dll" target="lib\net45\Raven.Client.Spatial.DotSpatial-4.5.dll" />
+        <file src="DotSpatial-4.5\bin\Release\Raven.Client.Spatial.DotSpatial-4.5.pdb" target="lib\net45\Raven.Client.Spatial.DotSpatial-4.5.pdb" />
     </files>
 </package>

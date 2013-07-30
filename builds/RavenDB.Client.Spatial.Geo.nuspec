@@ -21,6 +21,8 @@
     <files>
         <file src="Geo\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\net40\Raven.Client.Spatial.Geo.dll" />
         <file src="Geo\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\net40\Raven.Client.Spatial.Geo.pdb" />
+        <file src="Geo-4.5\bin\Release\Raven.Client.Spatial.Geo-4.5.dll" target="lib\net45\Raven.Client.Spatial.Geo-4.5.dll" />
+        <file src="Geo-4.5\bin\Release\Raven.Client.Spatial.Geo-4.5.pdb" target="lib\net45\Raven.Client.Spatial.Geo-4.5.pdb" />
         <file src="Geo.Silverlight5\bin\Release\Raven.Client.Spatial.Geo.dll" target="lib\sl50\Raven.Client.Spatial.Geo.dll" />
         <file src="Geo.Silverlight5\bin\Release\Raven.Client.Spatial.Geo.pdb" target="lib\sl50\Raven.Client.Spatial.Geo.pdb" />
     </files>

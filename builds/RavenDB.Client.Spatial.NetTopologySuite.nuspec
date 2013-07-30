@@ -21,6 +21,8 @@
     <files>
         <file src="NetTopologySuite\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\net40\Raven.Client.Spatial.NetTopologySuite.dll" />
         <file src="NetTopologySuite\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\net40\Raven.Client.Spatial.NetTopologySuite.pdb" />
+        <file src="NetTopologySuite-4.5\bin\Release\Raven.Client.Spatial.NetTopologySuite-4.5.dll" target="lib\net45\Raven.Client.Spatial.NetTopologySuite-4.5.dll" />
+        <file src="NetTopologySuite-4.5\bin\Release\Raven.Client.Spatial.NetTopologySuite-4.5.pdb" target="lib\net45\Raven.Client.Spatial.NetTopologySuite-4.5.pdb" />
         <file src="NetTopologySuite.Silverlight5\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\sl50\Raven.Client.Spatial.NetTopologySuite.dll" />
         <file src="NetTopologySuite.Silverlight5\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\sl50\Raven.Client.Spatial.NetTopologySuite.pdb" />
     </files>
