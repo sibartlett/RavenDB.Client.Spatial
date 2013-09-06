@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>RavenDB.Client.Spatial.NetTopologySuite</id>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
         <title>RavenDB JsonConverters for NetTopologySuite</title>
         <authors>Simon Bartlett</authors>
         <owners>Simon Bartlett</owners>
@@ -12,7 +12,7 @@
         <dependencies>
             <group>
                 <dependency id="NetTopologySuite" version="1.13.1" />
-                <dependency id="RavenDB.Client" version="2.5.2666" />
+                <dependency id="RavenDB.Client" version="2.5.2700" />
             </group>
         </dependencies>
         <tags>ravendb raven ravendbspatial spatial gps coordinates wgs84 geography geo NetTopologySuite nts</tags>
@@ -21,8 +21,8 @@
     <files>
         <file src="NetTopologySuite\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\net40\Raven.Client.Spatial.NetTopologySuite.dll" />
         <file src="NetTopologySuite\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\net40\Raven.Client.Spatial.NetTopologySuite.pdb" />
-        <file src="NetTopologySuite-4.5\bin\Release\Raven.Client.Spatial.NetTopologySuite-4.5.dll" target="lib\net45\Raven.Client.Spatial.NetTopologySuite-4.5.dll" />
-        <file src="NetTopologySuite-4.5\bin\Release\Raven.Client.Spatial.NetTopologySuite-4.5.pdb" target="lib\net45\Raven.Client.Spatial.NetTopologySuite-4.5.pdb" />
+        <file src="NetTopologySuite-4.5\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\net45\Raven.Client.Spatial.NetTopologySuite.dll" />
+        <file src="NetTopologySuite-4.5\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\net45\Raven.Client.Spatial.NetTopologySuite.pdb" />
         <file src="NetTopologySuite.Silverlight5\bin\Release\Raven.Client.Spatial.NetTopologySuite.dll" target="lib\sl50\Raven.Client.Spatial.NetTopologySuite.dll" />
         <file src="NetTopologySuite.Silverlight5\bin\Release\Raven.Client.Spatial.NetTopologySuite.pdb" target="lib\sl50\Raven.Client.Spatial.NetTopologySuite.pdb" />
     </files>

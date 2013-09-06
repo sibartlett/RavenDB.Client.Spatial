@@ -72,8 +72,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\packages\NetTopologySuite.1.13.1\lib\sl40\PowerCollections.SilverLight.dll</HintPath>
     </Reference>
-    <Reference Include="Raven.Client.Silverlight">
-      <HintPath>..\..\packages\RavenDB.Client.2.5.2666\lib\sl50\Raven.Client.Silverlight.dll</HintPath>
+    <Reference Include="Raven.Client.Silverlight, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\packages\RavenDB.Client.2.5.2700\lib\sl50\Raven.Client.Silverlight.dll</HintPath>
     </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
