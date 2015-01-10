@@ -118,7 +118,7 @@ namespace Raven.Client.Spatial.Geo
 
 		public object ToFeature(object geometry, object id, Dictionary<string, object> properties)
 		{
-			var feature = new Feature((IGeoJsonGeometry)geometry, properties);
+			var feature = new Feature((IGeometry)geometry, properties);
 			if (id != null)
 				feature.Id = id;
 			return feature;

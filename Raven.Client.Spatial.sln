@@ -16,19 +16,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSpatial", "builds\DotSpa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo", "builds\Geo\Geo.csproj", "{4D508B86-01ED-4580-B6E4-D24CFE7DA80B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo.Silverlight5", "builds\Geo.Silverlight5\Geo.Silverlight5.csproj", "{4BCC58C1-1670-45D0-80B3-018A234E0CDC}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuite", "builds\NetTopologySuite\NetTopologySuite.csproj", "{9E05F097-C71B-4C54-BE35-B81865278601}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuite.Silverlight5", "builds\NetTopologySuite.Silverlight5\NetTopologySuite.Silverlight5.csproj", "{5845A4EC-9ED2-4168-A9BA-5E62413DEA3E}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "builds", "builds", "{046FF5AB-058C-4321-906C-D0F86216EA45}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Geo-4.5", "builds\Geo-4.5\Geo-4.5.csproj", "{EBA3134C-F8A3-4545-B125-C313FB9F08F6}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotSpatial-4.5", "builds\DotSpatial-4.5\DotSpatial-4.5.csproj", "{461B7B19-F9C5-4F46-9303-3BDC2C2B4569}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetTopologySuite-4.5", "builds\NetTopologySuite-4.5\NetTopologySuite-4.5.csproj", "{3F10E155-D3BF-4BC2-8F06-31AF260D4189}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,30 +42,10 @@ Global
 		{4D508B86-01ED-4580-B6E4-D24CFE7DA80B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D508B86-01ED-4580-B6E4-D24CFE7DA80B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D508B86-01ED-4580-B6E4-D24CFE7DA80B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4BCC58C1-1670-45D0-80B3-018A234E0CDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4BCC58C1-1670-45D0-80B3-018A234E0CDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4BCC58C1-1670-45D0-80B3-018A234E0CDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4BCC58C1-1670-45D0-80B3-018A234E0CDC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9E05F097-C71B-4C54-BE35-B81865278601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9E05F097-C71B-4C54-BE35-B81865278601}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E05F097-C71B-4C54-BE35-B81865278601}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E05F097-C71B-4C54-BE35-B81865278601}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5845A4EC-9ED2-4168-A9BA-5E62413DEA3E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5845A4EC-9ED2-4168-A9BA-5E62413DEA3E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5845A4EC-9ED2-4168-A9BA-5E62413DEA3E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5845A4EC-9ED2-4168-A9BA-5E62413DEA3E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EBA3134C-F8A3-4545-B125-C313FB9F08F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EBA3134C-F8A3-4545-B125-C313FB9F08F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EBA3134C-F8A3-4545-B125-C313FB9F08F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EBA3134C-F8A3-4545-B125-C313FB9F08F6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{461B7B19-F9C5-4F46-9303-3BDC2C2B4569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{461B7B19-F9C5-4F46-9303-3BDC2C2B4569}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{461B7B19-F9C5-4F46-9303-3BDC2C2B4569}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{461B7B19-F9C5-4F46-9303-3BDC2C2B4569}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3F10E155-D3BF-4BC2-8F06-31AF260D4189}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3F10E155-D3BF-4BC2-8F06-31AF260D4189}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3F10E155-D3BF-4BC2-8F06-31AF260D4189}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3F10E155-D3BF-4BC2-8F06-31AF260D4189}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

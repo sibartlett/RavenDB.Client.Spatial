@@ -140,7 +140,7 @@ namespace Raven.Client.Spatial.NetTopologySuite
 #if SILVERLIGHT
 			throw new NotImplementedException();
 #else
-			return new FeatureCollection(new Collection<Feature>(features.Cast<Feature>().ToList()));
+			return new FeatureCollection(new Collection<IFeature>(features.Cast<IFeature>().ToList()));
 #endif
 		}
 
