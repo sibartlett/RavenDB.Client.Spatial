@@ -2,7 +2,7 @@
 
 ___[NuGet Packages!](https://nuget.org/packages?q=Tags%3A%22ravendbspatial%22)___
 
-Enabling you to use third-party spatial libraries with RavenDB 2.5+!
+Enabling you to use third-party spatial libraries with RavenDB 3.0+!
 
 GeoJSON and WKT JsonConverters for:
 
@@ -63,4 +63,4 @@ public class Program
 
 #### License
 
-Geo is licensed under the terms of the GNU Lesser General Public License as published by the Free Software Foundation.
+RavenDB.Client.Spatial is licensed under the terms of the GNU Lesser General Public License as published by the Free Software Foundation.
